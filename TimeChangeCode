@@ -1,0 +1,26 @@
+//Local script in StarterPlayerScripts (Updates time change for player)
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local modules = require(ReplicatedStorage.TimeChange)
+
+while true do
+	wait(0.1)
+	Time = game:GetService("Lighting").ClockTime
+	Time = Time + 0.003
+	print(Time)
+	if Time >= 24 then
+		Time = 0
+	end
+	modules.TimeChange(Time)
+end
+
+-----------------------------------------------
+
+//Module script in ReplicatedStorage (Makes it so time is globally the same)
+local module = {}
+
+module.TimeChange = function(Time)
+	game:GetService("Lighting").ClockTime = Time
+end
+
+return module
+
